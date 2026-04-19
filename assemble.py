@@ -125,6 +125,7 @@ def assemble_site(config: dict) -> str:
     footer = footer.replace("{{FOOTER_SHOP_LINKS}}", "")
     footer = footer.replace("{{FOOTER_COMPANY_LINKS}}", "")
     footer = footer.replace("{{SOCIAL_LINKS}}", "")
+    footer = footer.replace("{{YEAR}}", str(datetime.now().year))
     html = html.replace("{{FOOTER}}", footer)
     
     return html

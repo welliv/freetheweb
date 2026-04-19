@@ -1,31 +1,22 @@
-<nav class="navbar fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <div class="flex items-center gap-2">
-        {{LOGO}}
-        <span class="text-xl font-bold tracking-tight" style="color: var(--primary)">{{BUSINESS_NAME}}</span>
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex items-center justify-between h-20">
+      <a href="#" class="font-serif text-2xl font-semibold tracking-widest" style="color: var(--brand-primary, {{PRIMARY_COLOR}})">{{BUSINESS_NAME}}</a>
+      <div class="hidden md:flex items-center gap-10">
+        <a href="#collection" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Collection</a>
+        <a href="#philosophy" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Philosophy</a>
+        <a href="#atelier" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Atelier</a>
+        <a href="#contact" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Contact</a>
       </div>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#products" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Products</a>
-        <a href="#about" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">About</a>
-        <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Contact</a>
-        <a href="#cart" class="relative p-2 text-gray-700 hover:text-gray-900 transition">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-          </svg>
-          <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full text-xs text-white flex items-center justify-center" style="background: var(--primary)">0</span>
-        </a>
-      </div>
-      <button class="md:hidden p-2 text-gray-700" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+      <button class="md:hidden text-white" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden pb-4">
-      <a href="#products" class="block py-2 text-sm font-medium text-gray-700">Products</a>
-      <a href="#about" class="block py-2 text-sm font-medium text-gray-700">About</a>
-      <a href="#contact" class="block py-2 text-sm font-medium text-gray-700">Contact</a>
-    </div>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-brand-dark/95 backdrop-blur-xl border-t border-white/5 px-6 py-8">
+    <a href="#collection" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Collection</a>
+    <a href="#philosophy" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Philosophy</a>
+    <a href="#atelier" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Atelier</a>
+    <a href="#contact" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Contact</a>
   </div>
 </nav>

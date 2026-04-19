@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BUSINESS_NAME}} — {{TAGLINE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              primary: '{{PRIMARY_COLOR}}',
+              secondary: '{{SECONDARY_COLOR}}',
+              dark: '#050505',
+              card: '#111111',
+              muted: '#666666',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    
+    /* Scroll animations */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Product card */
+    .product-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .product-card:hover { transform: translateY(-8px); }
+    .product-card:hover .product-image { transform: scale(1.05); }
+    .product-image { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    
+    /* Button glow */
+    .btn-glow { position: relative; overflow: hidden; }
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-glow:hover::after { transform: translateX(100%); }
+    
+    /* Nav link underline */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: {{PRIMARY_COLOR}};
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    
+    /* Marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 30s linear infinite; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+    
+    /* Selection */
+    ::selection { background: rgba(201,169,110,0.3); color: #fff; }
+    
+    /* Ambient glow */
+    .glow::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, {{PRIMARY_COLOR}}15 0%, transparent 70%);
+      border-radius: 50%;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  {{NAVBAR}}
+  {{HERO}}
+  {{PRODUCTS}}
+  {{FEATURES}}
+  {{CTA}}
+  {{FOOTER}}
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+      });
+    });
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (nav) {
+        if (window.scrollY > 50) {
+          nav.style.background = 'rgba(5,5,5,0.9)';
+          nav.style.backdropFilter = 'blur(20px)';
+          nav.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        } else {
+          nav.style.background = 'transparent';
+          nav.style.backdropFilter = 'none';
+          nav.style.borderBottom = 'none';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

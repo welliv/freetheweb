@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CROWN — Redefine Luxury</title>
+  <meta name="description" content="CROWN — Redefining luxury for those who refuse to blend in. Handcrafted, premium, timeless.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,11 +18,10 @@
             sans: ['Inter', 'sans-serif'],
           },
           colors: {
-            crown: {
-              gold: '#c9a96e',
-              goldLight: '#e4d5b7',
-              dark: '#0a0a0a',
-              darker: '#050505',
+            brand: {
+              primary: '#c9a96e',
+              secondary: '#050505',
+              dark: '#050505',
               card: '#111111',
               muted: '#666666',
             }
@@ -38,45 +38,15 @@
     /* Scroll animations */
     .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .fade-in { opacity: 0; transition: opacity 1s ease; }
-    .fade-in.visible { opacity: 1; }
     
-    /* Ambient glow */
-    .glow { position: relative; }
-    .glow::before {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(201,169,110,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      top: -100px; left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    /* Product card hover */
+    /* Product card */
     .product-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
     .product-card:hover { transform: translateY(-8px); }
     .product-card:hover .product-image { transform: scale(1.05); }
     .product-image { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
     
-    /* Line animation */
-    .line-reveal { 
-      width: 0; 
-      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
-    }
-    .line-reveal.visible { width: 100%; }
-    
-    /* Marquee */
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 30s linear infinite; }
-    
-    /* Button hover glow */
-    .btn-glow { 
-      position: relative; 
-      overflow: hidden; 
-    }
+    /* Button glow */
+    .btn-glow { position: relative; overflow: hidden; }
     .btn-glow::after {
       content: '';
       position: absolute;
@@ -87,398 +57,273 @@
     }
     .btn-glow:hover::after { transform: translateX(100%); }
     
-    /* Custom cursor dot (optional, subtle) */
+    /* Nav link underline */
     .nav-link { position: relative; }
     .nav-link::after {
       content: '';
       position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
       background: #c9a96e;
       transition: width 0.3s ease;
     }
     .nav-link:hover::after { width: 100%; }
     
+    /* Marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 30s linear infinite; }
+    
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #050505; }
     ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #333; }
     
     /* Selection */
     ::selection { background: rgba(201,169,110,0.3); color: #fff; }
+    
+    /* Ambient glow */
+    .glow::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #c9a96e15 0%, transparent 70%);
+      border-radius: 50%;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
   </style>
+<script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="flex items-center justify-between h-20">
-        <a href="#" class="font-serif text-2xl font-semibold tracking-widest text-crown-gold">CROWN</a>
-        <div class="hidden md:flex items-center gap-10">
-          <a href="#collection" class="nav-link text-sm font-light tracking-wider text-crown-muted hover:text-white transition-colors duration-300 uppercase">Collection</a>
-          <a href="#philosophy" class="nav-link text-sm font-light tracking-wider text-crown-muted hover:text-white transition-colors duration-300 uppercase">Philosophy</a>
-          <a href="#atelier" class="nav-link text-sm font-light tracking-wider text-crown-muted hover:text-white transition-colors duration-300 uppercase">Atelier</a>
-          <a href="#contact" class="nav-link text-sm font-light tracking-wider text-crown-muted hover:text-white transition-colors duration-300 uppercase">Contact</a>
-        </div>
-        <button class="md:hidden text-white" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex items-center justify-between h-20">
+      <a href="#" class="font-serif text-2xl font-semibold tracking-widest" style="color: var(--brand-primary, #c9a96e)">CROWN</a>
+      <div class="hidden md:flex items-center gap-10">
+        <a href="#collection" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Collection</a>
+        <a href="#philosophy" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Philosophy</a>
+        <a href="#atelier" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Atelier</a>
+        <a href="#contact" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Contact</a>
       </div>
-    </div>
-    <!-- Mobile nav -->
-    <div id="mobile-nav" class="hidden md:hidden bg-crown-darker/95 backdrop-blur-xl border-t border-white/5 px-6 py-8">
-      <a href="#collection" class="block py-3 text-sm font-light tracking-wider text-crown-muted uppercase">Collection</a>
-      <a href="#philosophy" class="block py-3 text-sm font-light tracking-wider text-crown-muted uppercase">Philosophy</a>
-      <a href="#atelier" class="block py-3 text-sm font-light tracking-wider text-crown-muted uppercase">Atelier</a>
-      <a href="#contact" class="block py-3 text-sm font-light tracking-wider text-crown-muted uppercase">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden glow">
-    <!-- Background gradient -->
-    <div class="absolute inset-0 bg-gradient-to-b from-crown-darker via-crown-dark to-crown-darker"></div>
-    <!-- Ambient orbs -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-crown-gold/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-crown-gold/3 rounded-full blur-3xl"></div>
-    
-    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-      <p class="fade-up text-crown-gold text-sm tracking-[0.3em] uppercase mb-8 font-light">Spring / Summer 2026</p>
-      <h1 class="fade-up font-serif text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-light leading-[0.9] tracking-tight mb-8" style="transition-delay: 0.1s">
-        Redefine<br>
-        <span class="italic text-crown-gold">Luxury</span>
-      </h1>
-      <p class="fade-up text-crown-muted text-base sm:text-lg font-light max-w-md mx-auto mb-12 leading-relaxed" style="transition-delay: 0.2s">
-        Crafted for those who refuse to blend in.<br>Each piece, a statement of defiance.
-      </p>
-      <div class="fade-up flex flex-col sm:flex-row gap-4 justify-center" style="transition-delay: 0.3s">
-        <a href="#collection" class="btn-glow inline-flex items-center justify-center px-10 py-4 bg-crown-gold text-crown-darker text-sm font-medium tracking-wider uppercase hover:bg-crown-goldLight transition-colors duration-300">
-          Explore Collection
-        </a>
-        <a href="#philosophy" class="inline-flex items-center justify-center px-10 py-4 border border-white/20 text-white text-sm font-light tracking-wider uppercase hover:border-crown-gold/50 hover:text-crown-gold transition-all duration-300">
-          Our Story
-        </a>
-      </div>
-    </div>
-    
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-      <span class="text-[10px] tracking-[0.3em] uppercase text-crown-muted">Scroll</span>
-      <div class="w-px h-12 bg-gradient-to-b from-crown-gold/50 to-transparent animate-pulse"></div>
-    </div>
-  </section>
-
-  <!-- Marquee -->
-  <div class="py-6 border-y border-white/5 overflow-hidden">
-    <div class="marquee-track flex whitespace-nowrap">
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Handcrafted</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Timeless</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Defiant</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Premium</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Handcrafted</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Timeless</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Defiant</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Premium</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Handcrafted</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Timeless</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Defiant</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
-      <span class="text-crown-muted/30 text-sm tracking-[0.5em] uppercase mx-8">Premium</span>
-      <span class="text-crown-gold/30 mx-4">◆</span>
+      <button class="md:hidden text-white" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-brand-dark/95 backdrop-blur-xl border-t border-white/5 px-6 py-8">
+    <a href="#collection" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Collection</a>
+    <a href="#philosophy" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Philosophy</a>
+    <a href="#atelier" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Atelier</a>
+    <a href="#contact" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Contact</a>
+  </div>
+</nav>
 
-  <!-- Collection / Products -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden glow">
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark to-brand-dark"></div>
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style="background: #c9a96e08"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl" style="background: #c9a96e05"></div>
+  
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <p class="fade-up text-sm tracking-[0.3em] uppercase mb-8 font-light" style="color: #c9a96e">Spring / Summer 2026</p>
+    <h1 class="fade-up font-serif text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-light leading-[0.9] tracking-tight mb-8" style="transition-delay: 0.1s">
+      Redefine<br><span style="color: #c9a96e; font-style: italic">Luxury</span>
+    </h1>
+    <p class="fade-up text-brand-muted text-base sm:text-lg font-light max-w-md mx-auto mb-12 leading-relaxed" style="transition-delay: 0.2s">
+      Crafted for those who refuse to blend in. Each piece, a statement of defiance.
+    </p>
+    <div class="fade-up flex flex-col sm:flex-row gap-4 justify-center" style="transition-delay: 0.3s">
+      <a href="#collection" class="btn-glow inline-flex items-center justify-center px-10 py-4 text-brand-dark text-sm font-medium tracking-wider uppercase hover:opacity-90 transition-opacity duration-300" style="background: #c9a96e">
+        Explore Collection
+      </a>
+      <a href="#philosophy" class="inline-flex items-center justify-center px-10 py-4 border border-white/20 text-white text-sm font-light tracking-wider uppercase hover:border-white/40 transition-all duration-300">
+        Our Story
+      </a>
+    </div>
+  </div>
+  
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+    <span class="text-[10px] tracking-[0.3em] uppercase text-brand-muted">Scroll</span>
+    <div class="w-px h-12 bg-gradient-to-b to-transparent animate-pulse" style="background: linear-gradient(to bottom, #c9a96e80, transparent)"></div>
+  </div>
+</section>
+
   <section id="collection" class="py-24 lg:py-32 px-6 lg:px-12">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex items-end justify-between mb-16 lg:mb-24">
-        <div>
-          <p class="fade-up text-crown-gold text-xs tracking-[0.3em] uppercase mb-4">The Collection</p>
-          <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">Signature Pieces</h2>
-        </div>
-        <p class="fade-up hidden sm:block text-crown-muted text-sm font-light max-w-xs text-right" style="transition-delay: 0.2s">
-          Three defining pieces. Each one an extension of your identity.
-        </p>
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end justify-between mb-16 lg:mb-24">
+      <div>
+        <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: #c9a96e">The Collection</p>
+        <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">Signature Pieces</h2>
       </div>
-      
-      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
-        <!-- Product 1 -->
-        <div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
-          <div class="relative overflow-hidden bg-crown-card aspect-[3/4] mb-6">
-            <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="The Sovereign" class="product-image w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-              <a href="https://buy.stripe.com/test_4gM3cxehp9XtfdW8ti57W0N" target="_blank" class="btn-glow block w-full py-3 bg-crown-gold text-crown-darker text-sm font-medium tracking-wider uppercase text-center hover:bg-crown-goldLight transition-colors">
-                Purchase — $249
-              </a>
-            </div>
-            <span class="absolute top-4 left-4 px-3 py-1 bg-crown-gold text-crown-darker text-[10px] font-medium tracking-widest uppercase">Limited</span>
-          </div>
-          <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-crown-gold transition-colors duration-300">The Sovereign</h3>
-          <p class="text-crown-muted text-sm font-light">Italian leather. Hand-stitched. Uncompromising.</p>
-          <p class="text-crown-gold font-light mt-2">$249</p>
-        </div>
-        
-        <!-- Product 2 -->
-        <div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.2s">
-          <div class="relative overflow-hidden bg-crown-card aspect-[3/4] mb-6">
-            <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80" alt="The Eclipse" class="product-image w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-              <a href="https://buy.stripe.com/test_bJe14pfltd9F2raeRG57W0O" target="_blank" class="btn-glow block w-full py-3 bg-crown-gold text-crown-darker text-sm font-medium tracking-wider uppercase text-center hover:bg-crown-goldLight transition-colors">
-                Purchase — $189
-              </a>
-            </div>
-          </div>
-          <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-crown-gold transition-colors duration-300">The Eclipse</h3>
-          <p class="text-crown-muted text-sm font-light">Midnight cashmere. Draped in silence.</p>
-          <p class="text-crown-gold font-light mt-2">$189</p>
-        </div>
-        
-        <!-- Product 3 -->
-        <div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.3s">
-          <div class="relative overflow-hidden bg-crown-card aspect-[3/4] mb-6">
-            <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=600&q=80" alt="The Meridian" class="product-image w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-              <a href="https://buy.stripe.com/test_9B6fZjgpx4D94zieRG57W0P" target="_blank" class="btn-glow block w-full py-3 bg-crown-gold text-crown-darker text-sm font-medium tracking-wider uppercase text-center hover:bg-crown-goldLight transition-colors">
-                Purchase — $129
-              </a>
-            </div>
-            <span class="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur text-white text-[10px] font-medium tracking-widest uppercase">New Season</span>
-          </div>
-          <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-crown-gold transition-colors duration-300">The Meridian</h3>
-          <p class="text-crown-muted text-sm font-light">Structured silhouette. Everyday defiance.</p>
-          <p class="text-crown-gold font-light mt-2">$129</p>
-        </div>
-      </div>
+      <p class="fade-up hidden sm:block text-brand-muted text-sm font-light max-w-xs text-right" style="transition-delay: 0.2s">Three defining pieces. Each one an extension of your identity.</p>
     </div>
-  </section>
-
-  <!-- Philosophy / About -->
-  <section id="philosophy" class="py-24 lg:py-32 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-crown-darker via-crown-dark to-crown-darker"></div>
-    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-crown-gold/3 to-transparent"></div>
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+      <div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
+  <div class="relative overflow-hidden bg-brand-card aspect-[3/4] mb-6">
+    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="The Sovereign" class="product-image w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+      <a href="https://buy.stripe.com/test_4gM3cxehp9XtfdW8ti57W0N" target="_blank" class="btn-glow block w-full py-3 text-brand-dark text-sm font-medium tracking-wider uppercase text-center hover:opacity-90 transition-opacity" style="background: #c9a96e">
+        Purchase — $249.00
+      </a>
+    </div>
+    <span class="absolute top-4 left-4 px-3 py-1 text-brand-dark text-[10px] font-medium tracking-widest uppercase" style="background: #c9a96e">Limited</span>
+  </div>
+  <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-white transition-colors duration-300">The Sovereign</h3>
+  <p class="text-brand-muted text-sm font-light">Italian leather. Hand-stitched. Uncompromising.</p>
+  <p class="font-light mt-2" style="color: #c9a96e">$249.00</p>
+</div>
+<div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
+  <div class="relative overflow-hidden bg-brand-card aspect-[3/4] mb-6">
+    <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80" alt="The Eclipse" class="product-image w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+      <a href="https://buy.stripe.com/test_bJe14pfltd9F2raeRG57W0O" target="_blank" class="btn-glow block w-full py-3 text-brand-dark text-sm font-medium tracking-wider uppercase text-center hover:opacity-90 transition-opacity" style="background: #c9a96e">
+        Purchase — $189.00
+      </a>
+    </div>
     
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-        <div>
-          <p class="fade-up text-crown-gold text-xs tracking-[0.3em] uppercase mb-4">Our Philosophy</p>
-          <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light leading-tight mb-8" style="transition-delay: 0.1s">
-            Luxury is not<br><span class="italic text-crown-gold">conformity</span>
-          </h2>
-          <div class="fade-up space-y-6 text-crown-muted text-base font-light leading-relaxed" style="transition-delay: 0.2s">
-            <p>We believe true luxury isn't about logos or labels. It's about the quiet confidence of wearing something that was made with intention.</p>
-            <p>Every CROWN piece is designed in our atelier, crafted from materials sourced across three continents, and finished by artisans who've spent decades perfecting their craft.</p>
-            <p>We don't follow seasons. We don't chase trends. We create for those who lead.</p>
-          </div>
-        </div>
-        <div class="fade-up relative" style="transition-delay: 0.3s">
-          <div class="aspect-[4/5] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80" alt="CROWN Atelier" class="w-full h-full object-cover">
-          </div>
-          <div class="absolute -bottom-8 -left-8 bg-crown-card border border-white/5 p-8 max-w-xs">
-            <p class="font-serif text-3xl text-crown-gold mb-2">12</p>
-            <p class="text-crown-muted text-sm font-light">Years of uncompromising craft</p>
-          </div>
-        </div>
-      </div>
+  </div>
+  <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-white transition-colors duration-300">The Eclipse</h3>
+  <p class="text-brand-muted text-sm font-light">Midnight cashmere. Draped in silence.</p>
+  <p class="font-light mt-2" style="color: #c9a96e">$189.00</p>
+</div>
+<div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
+  <div class="relative overflow-hidden bg-brand-card aspect-[3/4] mb-6">
+    <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=600&q=80" alt="The Meridian" class="product-image w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+      <a href="https://buy.stripe.com/test_9B6fZjgpx4D94zieRG57W0P" target="_blank" class="btn-glow block w-full py-3 text-brand-dark text-sm font-medium tracking-wider uppercase text-center hover:opacity-90 transition-opacity" style="background: #c9a96e">
+        Purchase — $129.00
+      </a>
     </div>
-  </section>
+    <span class="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur text-white text-[10px] font-medium tracking-widest uppercase">New Season</span>
+  </div>
+  <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-white transition-colors duration-300">The Meridian</h3>
+  <p class="text-brand-muted text-sm font-light">Structured silhouette. Everyday defiance.</p>
+  <p class="font-light mt-2" style="color: #c9a96e">$129.00</p>
+</div>
 
-  <!-- Stats / Numbers -->
-  <section class="py-16 border-y border-white/5">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16">
-        <div class="fade-up text-center lg:text-left">
-          <p class="font-serif text-4xl lg:text-5xl text-crown-gold mb-2">3</p>
-          <p class="text-crown-muted text-sm font-light tracking-wider uppercase">Continents</p>
-        </div>
-        <div class="fade-up text-center lg:text-left" style="transition-delay: 0.1s">
-          <p class="font-serif text-4xl lg:text-5xl text-crown-gold mb-2">47</p>
-          <p class="text-crown-muted text-sm font-light tracking-wider uppercase">Artisans</p>
-        </div>
-        <div class="fade-up text-center lg:text-left" style="transition-delay: 0.2s">
-          <p class="font-serif text-4xl lg:text-5xl text-crown-gold mb-2">∞</p>
-          <p class="text-crown-muted text-sm font-light tracking-wider uppercase">Patience</p>
-        </div>
-        <div class="fade-up text-center lg:text-left" style="transition-delay: 0.3s">
-          <p class="font-serif text-4xl lg:text-5xl text-crown-gold mb-2">0</p>
-          <p class="text-crown-muted text-sm font-light tracking-wider uppercase">Compromises</p>
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Atelier / Features -->
   <section id="atelier" class="py-24 lg:py-32 px-6 lg:px-12">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16 lg:mb-24">
-        <p class="fade-up text-crown-gold text-xs tracking-[0.3em] uppercase mb-4">The Atelier</p>
-        <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">How We Create</h2>
-      </div>
-      
-      <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
-        <div class="fade-up group" style="transition-delay: 0.1s">
-          <div class="w-12 h-12 border border-crown-gold/30 flex items-center justify-center mb-6 group-hover:bg-crown-gold/10 transition-colors duration-300">
-            <span class="font-serif text-crown-gold text-lg">I</span>
-          </div>
-          <h3 class="font-serif text-2xl font-light mb-3">Source</h3>
-          <p class="text-crown-muted text-sm font-light leading-relaxed">Materials hand-selected from Italian tanneries, Japanese mills, and Scottish woolens. No shortcuts. No substitutions.</p>
-        </div>
-        <div class="fade-up group" style="transition-delay: 0.2s">
-          <div class="w-12 h-12 border border-crown-gold/30 flex items-center justify-center mb-6 group-hover:bg-crown-gold/10 transition-colors duration-300">
-            <span class="font-serif text-crown-gold text-lg">II</span>
-          </div>
-          <h3 class="font-serif text-2xl font-light mb-3">Craft</h3>
-          <p class="text-crown-muted text-sm font-light leading-relaxed">Each piece passes through 14 stages of hand-finishing. Our artisans average 22 years of experience.</p>
-        </div>
-        <div class="fade-up group" style="transition-delay: 0.3s">
-          <div class="w-12 h-12 border border-crown-gold/30 flex items-center justify-center mb-6 group-hover:bg-crown-gold/10 transition-colors duration-300">
-            <span class="font-serif text-crown-gold text-lg">III</span>
-          </div>
-          <h3 class="font-serif text-2xl font-light mb-3">Deliver</h3>
-          <p class="text-crown-muted text-sm font-light leading-relaxed">Presented in hand-made packaging. Delivered with white-glove care. Every detail considered.</p>
-        </div>
-      </div>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 lg:mb-24">
+      <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: #c9a96e">The Atelier</p>
+      <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">How We Create</h2>
     </div>
-  </section>
+    <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+      <div class="fade-up group">
+  <div class="w-12 h-12 border flex items-center justify-center mb-6 group-hover:bg-white/5 transition-colors duration-300" style="border-color: #c9a96e30">
+    <span class="font-serif text-lg" style="color: #c9a96e">I</span>
+  </div>
+  <h3 class="font-serif text-2xl font-light mb-3">Source</h3>
+  <p class="text-brand-muted text-sm font-light leading-relaxed">Materials hand-selected from Italian tanneries, Japanese mills, and Scottish woolens. No shortcuts. No substitutions.</p>
+</div>
+<div class="fade-up group">
+  <div class="w-12 h-12 border flex items-center justify-center mb-6 group-hover:bg-white/5 transition-colors duration-300" style="border-color: #c9a96e30">
+    <span class="font-serif text-lg" style="color: #c9a96e">II</span>
+  </div>
+  <h3 class="font-serif text-2xl font-light mb-3">Craft</h3>
+  <p class="text-brand-muted text-sm font-light leading-relaxed">Each piece passes through 14 stages of hand-finishing. Our artisans average 22 years of experience.</p>
+</div>
+<div class="fade-up group">
+  <div class="w-12 h-12 border flex items-center justify-center mb-6 group-hover:bg-white/5 transition-colors duration-300" style="border-color: #c9a96e30">
+    <span class="font-serif text-lg" style="color: #c9a96e">III</span>
+  </div>
+  <h3 class="font-serif text-2xl font-light mb-3">Deliver</h3>
+  <p class="text-brand-muted text-sm font-light leading-relaxed">Presented in hand-made packaging. Delivered with white-glove care. Every detail considered.</p>
+</div>
 
-  <!-- Full-width Image -->
-  <section class="relative h-[60vh] lg:h-[80vh] overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80" alt="CROWN Editorial" class="w-full h-full object-cover">
-    <div class="absolute inset-0 bg-gradient-to-t from-crown-darker via-crown-darker/30 to-crown-darker/50"></div>
-    <div class="absolute bottom-12 left-6 lg:left-12 max-w-lg">
-      <p class="fade-up font-serif text-3xl lg:text-5xl font-light leading-tight mb-4">Wear the<br><span class="italic text-crown-gold">crown</span></p>
-      <p class="fade-up text-crown-muted text-sm font-light" style="transition-delay: 0.1s">Spring/Summer 2026 Editorial</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Testimonial -->
-  <section class="py-24 lg:py-32 px-6 lg:px-12">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="fade-up">
-        <svg class="w-8 h-8 text-crown-gold/30 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-      </div>
-      <blockquote class="fade-up font-serif text-2xl lg:text-4xl font-light leading-relaxed italic mb-8" style="transition-delay: 0.1s">
-        "CROWN doesn't follow luxury. CROWN is what luxury follows."
-      </blockquote>
-      <div class="fade-up" style="transition-delay: 0.2s">
-        <p class="text-white text-sm font-medium">Editorial Review</p>
-        <p class="text-crown-muted text-sm font-light">Vogue International</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA / Newsletter -->
   <section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-crown-darker via-crown-dark to-crown-darker"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="w-[600px] h-[600px] bg-crown-gold/5 rounded-full blur-3xl"></div>
-    </div>
-    
-    <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
-      <p class="fade-up text-crown-gold text-xs tracking-[0.3em] uppercase mb-4">Join the Inner Circle</p>
-      <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light mb-6" style="transition-delay: 0.1s">Be <span class="italic text-crown-gold">First</span></h2>
-      <p class="fade-up text-crown-muted text-base font-light mb-10 max-w-md mx-auto" style="transition-delay: 0.2s">
-        Exclusive access to new collections, private events, and pieces before they go public.
-      </p>
-      <form class="fade-up flex flex-col sm:flex-row gap-3 max-w-md mx-auto" style="transition-delay: 0.3s" onsubmit="event.preventDefault(); this.innerHTML='<p class=text-crown-gold font-light>Thank you. Welcome to the inner circle.</p>'">
-        <input type="email" placeholder="Your email" required class="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white text-sm font-light placeholder-crown-muted focus:outline-none focus:border-crown-gold/50 transition-colors">
-        <button type="submit" class="btn-glow px-8 py-4 bg-crown-gold text-crown-darker text-sm font-medium tracking-wider uppercase hover:bg-crown-goldLight transition-colors">
-          Join
-        </button>
-      </form>
-    </div>
-  </section>
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark to-brand-dark"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="w-[600px] h-[600px] rounded-full blur-3xl" style="background: #c9a96e08"></div>
+  </div>
+  <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
+    <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: #c9a96e">Join the Inner Circle</p>
+    <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light mb-6" style="transition-delay: 0.1s">Be <span style="font-style: italic; color: #c9a96e">First</span></h2>
+    <p class="fade-up text-brand-muted text-base font-light mb-10 max-w-md mx-auto" style="transition-delay: 0.2s">Exclusive access to new collections, private events, and pieces before they go public.</p>
+    <form class="fade-up flex flex-col sm:flex-row gap-3 max-w-md mx-auto" style="transition-delay: 0.3s" onsubmit="event.preventDefault(); this.innerHTML='<p class=font-light style=color:#c9a96e>Thank you. Welcome to the inner circle.</p>'">
+      <input type="email" placeholder="Your email" required class="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white text-sm font-light placeholder-brand-muted focus:outline-none focus:border-white/30 transition-colors">
+      <button type="submit" class="btn-glow px-8 py-4 text-brand-dark text-sm font-medium tracking-wider uppercase hover:opacity-90 transition-opacity" style="background: #c9a96e">Join</button>
+    </form>
+  </div>
+</section>
 
-  <!-- Footer -->
   <footer class="border-t border-white/5 py-16 px-6 lg:px-12">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-        <div>
-          <a href="#" class="font-serif text-2xl font-semibold tracking-widest text-crown-gold">CROWN</a>
-          <p class="text-crown-muted text-sm font-light mt-4 leading-relaxed">Redefining luxury for those who refuse to blend in.</p>
-        </div>
-        <div>
-          <h4 class="text-xs tracking-[0.2em] uppercase text-crown-muted mb-4">Shop</h4>
-          <ul class="space-y-3">
-            <li><a href="#collection" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Collection</a></li>
-            <li><a href="#" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">New Arrivals</a></li>
-            <li><a href="#" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Best Sellers</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-xs tracking-[0.2em] uppercase text-crown-muted mb-4">Company</h4>
-          <ul class="space-y-3">
-            <li><a href="#philosophy" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Our Story</a></li>
-            <li><a href="#atelier" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Atelier</a></li>
-            <li><a href="#contact" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-xs tracking-[0.2em] uppercase text-crown-muted mb-4">Legal</h4>
-          <ul class="space-y-3">
-            <li><a href="#" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Privacy</a></li>
-            <li><a href="#" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Terms</a></li>
-            <li><a href="#" class="text-sm text-white/60 hover:text-crown-gold transition-colors font-light">Returns</a></li>
-          </ul>
-        </div>
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <div>
+        <a href="#" class="font-serif text-2xl font-semibold tracking-widest" style="color: #c9a96e">CROWN</a>
+        <p class="text-brand-muted text-sm font-light mt-4 leading-relaxed">Redefining luxury for those who refuse to blend in.</p>
       </div>
-      <div class="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white/5">
-        <p class="text-crown-muted/50 text-xs font-light">&copy; 2026 CROWN. All rights reserved.</p>
-        <p class="text-crown-muted/30 text-xs font-light mt-2 sm:mt-0">Built with <a href="https://freetheweb.net" class="text-crown-gold/50 hover:text-crown-gold transition-colors">FreeTheWeb</a> — own your code.</p>
+      <div>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Shop</h4>
+        <ul class="space-y-3">
+          <li><a href="#collection" class="text-sm text-white/60 hover:text-white transition-colors font-light">Collection</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">New Arrivals</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Best Sellers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Company</h4>
+        <ul class="space-y-3">
+          <li><a href="#philosophy" class="text-sm text-white/60 hover:text-white transition-colors font-light">Our Story</a></li>
+          <li><a href="#atelier" class="text-sm text-white/60 hover:text-white transition-colors font-light">Atelier</a></li>
+          <li><a href="#contact" class="text-sm text-white/60 hover:text-white transition-colors font-light">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Privacy</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Terms</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Returns</a></li>
+        </ul>
       </div>
     </div>
-  </footer>
+    <div class="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white/5">
+      <p class="text-brand-muted/50 text-xs font-light">&copy; 2026 CROWN. All rights reserved.</p>
+      <p class="text-brand-muted/30 text-xs font-light mt-2 sm:mt-0">Built with <a href="https://freetheweb.net" class="hover:text-white transition-colors" style="color: #c9a96e80">FreeTheWeb</a> — own your code.</p>
+    </div>
+  </div>
+</footer>
+
 
   <!-- Scroll Animation Script -->
   <script>
-    // Intersection Observer for fade animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.fade-up, .fade-in, .line-reveal').forEach(el => observer.observe(el));
-
-    // Trigger hero animations on load
+    document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
     window.addEventListener('load', () => {
       document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight) {
-          el.classList.add('visible');
-        }
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
       });
     });
-
-    // Navbar background on scroll
     window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(5,5,5,0.9)';
-        navbar.style.backdropFilter = 'blur(20px)';
-        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
-      } else {
-        navbar.style.background = 'transparent';
-        navbar.style.backdropFilter = 'none';
-        navbar.style.borderBottom = 'none';
+      const nav = document.getElementById('navbar');
+      if (nav) {
+        if (window.scrollY > 50) {
+          nav.style.background = 'rgba(5,5,5,0.9)';
+          nav.style.backdropFilter = 'blur(20px)';
+          nav.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        } else {
+          nav.style.background = 'transparent';
+          nav.style.backdropFilter = 'none';
+          nav.style.borderBottom = 'none';
+        }
       }
     });
   </script>

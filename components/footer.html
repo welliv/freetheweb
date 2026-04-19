@@ -1,40 +1,38 @@
-<footer id="contact" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+<footer class="border-t border-white/5 py-16 px-6 lg:px-12">
   <div class="max-w-7xl mx-auto">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          {{LOGO}}
-          <span class="text-xl font-bold">{{BUSINESS_NAME}}</span>
-        </div>
-        <p class="text-gray-400 text-sm leading-relaxed">{{FOOTER_DESCRIPTION}}</p>
+        <a href="#" class="font-serif text-2xl font-semibold tracking-widest" style="color: {{PRIMARY_COLOR}}">{{BUSINESS_NAME}}</a>
+        <p class="text-brand-muted text-sm font-light mt-4 leading-relaxed">{{FOOTER_DESCRIPTION}}</p>
       </div>
       <div>
-        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Shop</h4>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Shop</h4>
         <ul class="space-y-3">
-          <li><a href="#products" class="text-gray-300 hover:text-white transition text-sm">All Products</a></li>
-          {{FOOTER_SHOP_LINKS}}
+          <li><a href="#collection" class="text-sm text-white/60 hover:text-white transition-colors font-light">Collection</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">New Arrivals</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Best Sellers</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Company</h4>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Company</h4>
         <ul class="space-y-3">
-          <li><a href="#about" class="text-gray-300 hover:text-white transition text-sm">About Us</a></li>
-          <li><a href="#contact" class="text-gray-300 hover:text-white transition text-sm">Contact</a></li>
-          {{FOOTER_COMPANY_LINKS}}
+          <li><a href="#philosophy" class="text-sm text-white/60 hover:text-white transition-colors font-light">Our Story</a></li>
+          <li><a href="#atelier" class="text-sm text-white/60 hover:text-white transition-colors font-light">Atelier</a></li>
+          <li><a href="#contact" class="text-sm text-white/60 hover:text-white transition-colors font-light">Contact</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Connect</h4>
-        <div class="flex gap-4">
-          {{SOCIAL_LINKS}}
-        </div>
-        <p class="text-gray-500 text-xs mt-6">
-          Built with <a href="https://freetheweb.net" class="underline hover:text-white">FreeTheWeb</a> — own your code.
-        </p>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Privacy</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Terms</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Returns</a></li>
+        </ul>
       </div>
     </div>
-    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
-      <p class="text-gray-500 text-sm">&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</p>
+    <div class="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white/5">
+      <p class="text-brand-muted/50 text-xs font-light">&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</p>
+      <p class="text-brand-muted/30 text-xs font-light mt-2 sm:mt-0">Built with <a href="https://freetheweb.net" class="hover:text-white transition-colors" style="color: {{PRIMARY_COLOR}}80">FreeTheWeb</a> — own your code.</p>
     </div>
   </div>
 </footer>

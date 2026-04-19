@@ -1,10 +1,13 @@
-<section id="products" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+<section id="collection" class="py-24 lg:py-32 px-6 lg:px-12">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Products</h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">{{PRODUCTS_SUBTEXT}}</p>
+    <div class="flex items-end justify-between mb-16 lg:mb-24">
+      <div>
+        <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: {{PRIMARY_COLOR}}">The Collection</p>
+        <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">Signature Pieces</h2>
+      </div>
+      <p class="fade-up hidden sm:block text-brand-muted text-sm font-light max-w-xs text-right" style="transition-delay: 0.2s">{{PRODUCTS_SUBTEXT}}</p>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
       {{PRODUCT_CARDS}}
     </div>
   </div>

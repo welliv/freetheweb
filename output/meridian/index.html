@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MERIDIAN — Precision Redefined</title>
+  <meta name="description" content="MERIDIAN — Swiss-engineered luxury timepieces. Precision redefined.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              primary: '#c9a96e',
+              secondary: '#050505',
+              dark: '#050505',
+              card: '#111111',
+              muted: '#666666',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    
+    /* === shadcn/ui Design Tokens === */
+    :root {
+      --radius: 0.75rem;
+      --radius-sm: 0.5rem;
+      --radius-lg: 1rem;
+      --radius-full: 9999px;
+      
+      /* Shadows — layered, subtle depth */
+      --shadow-xs: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.4), 0 4px 6px rgba(0,0,0,0.3);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.5), 0 8px 10px rgba(0,0,0,0.3);
+      --shadow-glow: 0 0 20px #c9a96e15, 0 0 40px #c9a96e08;
+      
+      /* Borders */
+      --border: 1px solid rgba(255,255,255,0.08);
+      --border-hover: 1px solid rgba(255,255,255,0.15);
+      --border-active: 1px solid #c9a96e40;
+      
+      /* Muted */
+      --muted: #666;
+      --muted-hover: #888;
+    }
+    
+    /* Scroll animations */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    
+    /* Product card — shadcn/ui style */
+    .product-card {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      border: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border: var(--border-hover);
+      box-shadow: var(--shadow-lg);
+    }
+    .product-card:hover .product-image { transform: scale(1.03); }
+    .product-image { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    
+    /* Button — shadcn/ui style */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.625rem 1.5rem;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0.625rem 1.5rem;
+      border: var(--border);
+      background: transparent;
+      color: #fff;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      border: var(--border-hover);
+      background: rgba(255,255,255,0.03);
+    }
+    
+    /* Button glow effect */
+    .btn-glow { position: relative; overflow: hidden; }
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-glow:hover::after { transform: translateX(100%); }
+    
+    /* Card — generic shadcn/ui card */
+    .card {
+      border: var(--border);
+      border-radius: var(--radius);
+      background: #0a0a0a;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      border: var(--border-hover);
+      box-shadow: var(--shadow-md);
+    }
+    
+    /* Input — shadcn/ui style */
+    .input {
+      width: 100%;
+      padding: 0.625rem 1rem;
+      border: var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03);
+      color: #fff;
+      font-size: 0.875rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .input:focus {
+      border: var(--border-active);
+      box-shadow: 0 0 0 2px #c9a96e15;
+    }
+    .input::placeholder {
+      color: var(--muted);
+    }
+    
+    /* Nav link underline */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: #c9a96e;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    
+    /* Marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 30s linear infinite; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+    
+    /* Selection */
+    ::selection { background: #c9a96e30; color: #fff; }
+    
+    /* Ambient glow */
+    .glow::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #c9a96e15 0%, transparent 70%);
+      border-radius: 50%;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* Separator — shadcn/ui */
+    .separator {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      width: 100%;
+    }
+  </style>
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex items-center justify-between h-20">
+      <a href="#" class="font-serif text-2xl font-semibold tracking-widest" style="color: var(--brand-primary, #c9a96e)">MERIDIAN</a>
+      <div class="hidden md:flex items-center gap-10">
+        <a href="#collection" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Collection</a>
+        <a href="#philosophy" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Philosophy</a>
+        <a href="#atelier" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Atelier</a>
+        <a href="#contact" class="nav-link text-sm font-light tracking-wider text-brand-muted hover:text-white transition-colors duration-300 uppercase">Contact</a>
+      </div>
+      <button class="md:hidden text-white" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-brand-dark/95 backdrop-blur-xl border-t border-white/5 px-6 py-8">
+    <a href="#collection" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Collection</a>
+    <a href="#philosophy" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Philosophy</a>
+    <a href="#atelier" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Atelier</a>
+    <a href="#contact" class="block py-3 text-sm font-light tracking-wider text-brand-muted uppercase">Contact</a>
+  </div>
+</nav>
+
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden glow">
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark to-brand-dark"></div>
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style="background: #c9a96e08"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl" style="background: #c9a96e05"></div>
+  
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <p class="fade-up text-sm tracking-[0.3em] uppercase mb-8 font-light" style="color: #c9a96e">Swiss Crafted • Limited Edition</p>
+    <h1 class="fade-up font-serif text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-light leading-[0.9] tracking-tight mb-8" style="transition-delay: 0.1s">
+      Precision<br><span style="color: #c9a96e; font-style: italic">Redefined</span>
+    </h1>
+    <p class="fade-up text-brand-muted text-base sm:text-lg font-light max-w-md mx-auto mb-12 leading-relaxed" style="transition-delay: 0.2s">
+      Swiss-engineered timepieces for those who measure moments, not just hours.
+    </p>
+    <div class="fade-up flex flex-col sm:flex-row gap-4 justify-center" style="transition-delay: 0.3s">
+      <a href="#collection" class="btn-glow inline-flex items-center justify-center px-10 py-4 text-brand-dark text-sm font-medium tracking-wider uppercase hover:opacity-90 transition-opacity duration-300" style="background: #c9a96e">
+        Explore Collection
+      </a>
+      <a href="#philosophy" class="inline-flex items-center justify-center px-10 py-4 border border-white/20 text-white text-sm font-light tracking-wider uppercase hover:border-white/40 transition-all duration-300">
+        Our Story
+      </a>
+    </div>
+  </div>
+  
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+    <span class="text-[10px] tracking-[0.3em] uppercase text-brand-muted">Scroll</span>
+    <div class="w-px h-12 bg-gradient-to-b to-transparent animate-pulse" style="background: linear-gradient(to bottom, #c9a96e80, transparent)"></div>
+  </div>
+</section>
+
+  <section id="collection" class="py-24 lg:py-32 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end justify-between mb-16 lg:mb-24">
+      <div>
+        <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: #c9a96e">The Collection</p>
+        <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">Signature Pieces</h2>
+      </div>
+      <p class="fade-up hidden sm:block text-brand-muted text-sm font-light max-w-xs text-right" style="transition-delay: 0.2s">Three movements. Three stories. Each one built to outlast you.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+      <div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
+  <div class="relative overflow-hidden bg-brand-card aspect-[3/4] mb-6">
+    <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&q=80" alt="The Classic" class="product-image w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+      <a href="https://buy.stripe.com/test_8x214pddlb1x9TC38Y57W0R" target="_blank" class="btn-glow block w-full py-3 text-brand-dark text-sm font-medium tracking-wider uppercase text-center hover:opacity-90 transition-opacity" style="background: #c9a96e">
+        Purchase — $299.00
+      </a>
+    </div>
+    <span class="absolute top-4 left-4 px-3 py-1 text-brand-dark text-[10px] font-medium tracking-widest uppercase" style="background: #c9a96e">Best Seller</span>
+  </div>
+  <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-white transition-colors duration-300">The Classic</h3>
+  <p class="text-brand-muted text-sm font-light">Swiss movement, leather strap. Timeless elegance.</p>
+  <p class="font-light mt-2" style="color: #c9a96e">$299.00</p>
+</div>
+<div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
+  <div class="relative overflow-hidden bg-brand-card aspect-[3/4] mb-6">
+    <img src="https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=600&q=80" alt="The Sovereign" class="product-image w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+      <a href="https://buy.stripe.com/test_9B68wRgpx3z50j238Y57W0S" target="_blank" class="btn-glow block w-full py-3 text-brand-dark text-sm font-medium tracking-wider uppercase text-center hover:opacity-90 transition-opacity" style="background: #c9a96e">
+        Purchase — $499.00
+      </a>
+    </div>
+    
+  </div>
+  <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-white transition-colors duration-300">The Sovereign</h3>
+  <p class="text-brand-muted text-sm font-light">Automatic, titanium case. Bold precision.</p>
+  <p class="font-light mt-2" style="color: #c9a96e">$499.00</p>
+</div>
+<div class="fade-up product-card group cursor-pointer" style="transition-delay: 0.1s">
+  <div class="relative overflow-hidden bg-brand-card aspect-[3/4] mb-6">
+    <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=600&q=80" alt="The Eclipse" class="product-image w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+      <a href="https://buy.stripe.com/test_dRm00l5KT7PlfdW24U57W0T" target="_blank" class="btn-glow block w-full py-3 text-brand-dark text-sm font-medium tracking-wider uppercase text-center hover:opacity-90 transition-opacity" style="background: #c9a96e">
+        Purchase — $799.00
+      </a>
+    </div>
+    <span class="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur text-white text-[10px] font-medium tracking-widest uppercase">Limited</span>
+  </div>
+  <h3 class="font-serif text-xl lg:text-2xl font-light mb-2 group-hover:text-white transition-colors duration-300">The Eclipse</h3>
+  <p class="text-brand-muted text-sm font-light">Tourbillon, rose gold. Masterpiece.</p>
+  <p class="font-light mt-2" style="color: #c9a96e">$799.00</p>
+</div>
+
+    </div>
+  </div>
+</section>
+
+  <section id="atelier" class="py-24 lg:py-32 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 lg:mb-24">
+      <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: #c9a96e">The Atelier</p>
+      <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light" style="transition-delay: 0.1s">How We Build</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+      <div class="fade-up group">
+  <div class="w-12 h-12 border flex items-center justify-center mb-6 group-hover:bg-white/5 transition-colors duration-300" style="border-color: #c9a96e30">
+    <span class="font-serif text-lg" style="color: #c9a96e">I</span>
+  </div>
+  <h3 class="font-serif text-2xl font-light mb-3">Swiss Movement</h3>
+  <p class="text-brand-muted text-sm font-light leading-relaxed">Every mechanism calibrated to 0.5 seconds per day. Precision you can feel.</p>
+</div>
+<div class="fade-up group">
+  <div class="w-12 h-12 border flex items-center justify-center mb-6 group-hover:bg-white/5 transition-colors duration-300" style="border-color: #c9a96e30">
+    <span class="font-serif text-lg" style="color: #c9a96e">II</span>
+  </div>
+  <h3 class="font-serif text-2xl font-light mb-3">Sapphire Crystal</h3>
+  <p class="text-brand-muted text-sm font-light leading-relaxed">Scratch-resistant sapphire glass, hardened to 9 on the Mohs scale.</p>
+</div>
+<div class="fade-up group">
+  <div class="w-12 h-12 border flex items-center justify-center mb-6 group-hover:bg-white/5 transition-colors duration-300" style="border-color: #c9a96e30">
+    <span class="font-serif text-lg" style="color: #c9a96e">III</span>
+  </div>
+  <h3 class="font-serif text-2xl font-light mb-3">Lifetime Warranty</h3>
+  <p class="text-brand-muted text-sm font-light leading-relaxed">Every MERIDIAN comes with a lifetime service guarantee. We stand behind every tick.</p>
+</div>
+
+    </div>
+  </div>
+</section>
+
+  <section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark to-brand-dark"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="w-[600px] h-[600px] rounded-full blur-3xl" style="background: #c9a96e08"></div>
+  </div>
+  <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
+    <p class="fade-up text-xs tracking-[0.3em] uppercase mb-4" style="color: #c9a96e">Join the Inner Circle</p>
+    <h2 class="fade-up font-serif text-4xl lg:text-6xl font-light mb-6" style="transition-delay: 0.1s">Be <span style="font-style: italic; color: #c9a96e">First</span></h2>
+    <p class="fade-up text-brand-muted text-base font-light mb-10 max-w-md mx-auto" style="transition-delay: 0.2s">Join the MERIDIAN circle. Early access to new releases and private events.</p>
+    <form class="fade-up flex flex-col sm:flex-row gap-3 max-w-md mx-auto" style="transition-delay: 0.3s" onsubmit="event.preventDefault(); this.innerHTML='<p class=font-light style=color:#c9a96e>Thank you. Welcome to the inner circle.</p>'">
+      <input type="email" placeholder="Your email" required class="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white text-sm font-light placeholder-brand-muted focus:outline-none focus:border-white/30 transition-colors">
+      <button type="submit" class="btn-glow px-8 py-4 text-brand-dark text-sm font-medium tracking-wider uppercase hover:opacity-90 transition-opacity" style="background: #c9a96e">Join</button>
+    </form>
+  </div>
+</section>
+
+  <footer class="border-t border-white/5 py-16 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <div>
+        <a href="#" class="font-serif text-2xl font-semibold tracking-widest" style="color: #c9a96e">MERIDIAN</a>
+        <p class="text-brand-muted text-sm font-light mt-4 leading-relaxed">Swiss-engineered timepieces for those who measure moments, not just hours.</p>
+      </div>
+      <div>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Shop</h4>
+        <ul class="space-y-3">
+          <li><a href="#collection" class="text-sm text-white/60 hover:text-white transition-colors font-light">Collection</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">New Arrivals</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Best Sellers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Company</h4>
+        <ul class="space-y-3">
+          <li><a href="#philosophy" class="text-sm text-white/60 hover:text-white transition-colors font-light">Our Story</a></li>
+          <li><a href="#atelier" class="text-sm text-white/60 hover:text-white transition-colors font-light">Atelier</a></li>
+          <li><a href="#contact" class="text-sm text-white/60 hover:text-white transition-colors font-light">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs tracking-[0.2em] uppercase text-brand-muted mb-4">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Privacy</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Terms</a></li>
+          <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors font-light">Returns</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white/5">
+      <p class="text-brand-muted/50 text-xs font-light">&copy; 2026 MERIDIAN. All rights reserved.</p>
+      <p class="text-brand-muted/30 text-xs font-light mt-2 sm:mt-0">Built with <a href="https://freetheweb.net" class="hover:text-white transition-colors" style="color: #c9a96e80">FreeTheWeb</a> — own your code.</p>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.fade-up, .fade-in').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+      });
+    });
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (nav) {
+        if (window.scrollY > 50) {
+          nav.style.background = 'rgba(5,5,5,0.9)';
+          nav.style.backdropFilter = 'blur(20px)';
+          nav.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        } else {
+          nav.style.background = 'transparent';
+          nav.style.backdropFilter = 'none';
+          nav.style.borderBottom = 'none';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

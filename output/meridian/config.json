@@ -1,0 +1,63 @@
+{
+  "business_name": "MERIDIAN",
+  "tagline": "Precision Redefined",
+  "tagline_badge": "Swiss Crafted \u2022 Limited Edition",
+  "hero_headline": "Precision<br><span style=\"color: {{PRIMARY_COLOR}}; font-style: italic\">Redefined</span>",
+  "hero_subtext": "Swiss-engineered timepieces for those who measure moments, not just hours.",
+  "hero_image": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1600&q=80",
+  "primary_color": "#c9a96e",
+  "secondary_color": "#050505",
+  "meta_description": "MERIDIAN \u2014 Swiss-engineered luxury timepieces. Precision redefined.",
+  "products": [
+    {
+      "name": "The Classic",
+      "description": "Swiss movement, leather strap. Timeless elegance.",
+      "price_cents": 29900,
+      "currency": "usd",
+      "image_url": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&q=80",
+      "badge": "<span class=\"absolute top-4 left-4 px-3 py-1 text-brand-dark text-[10px] font-medium tracking-widest uppercase\" style=\"background: {{PRIMARY_COLOR}}\">Best Seller</span>",
+      "stripe_link": "https://buy.stripe.com/test_8x214pddlb1x9TC38Y57W0R"
+    },
+    {
+      "name": "The Sovereign",
+      "description": "Automatic, titanium case. Bold precision.",
+      "price_cents": 49900,
+      "currency": "usd",
+      "image_url": "https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=600&q=80",
+      "badge": "",
+      "stripe_link": "https://buy.stripe.com/test_9B68wRgpx3z50j238Y57W0S"
+    },
+    {
+      "name": "The Eclipse",
+      "description": "Tourbillon, rose gold. Masterpiece.",
+      "price_cents": 79900,
+      "currency": "usd",
+      "image_url": "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=600&q=80",
+      "badge": "<span class=\"absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur text-white text-[10px] font-medium tracking-widest uppercase\">Limited</span>",
+      "stripe_link": "https://buy.stripe.com/test_dRm00l5KT7PlfdW24U57W0T"
+    }
+  ],
+  "products_subtext": "Three movements. Three stories. Each one built to outlast you.",
+  "features": [
+    {
+      "title": "Swiss Movement",
+      "description": "Every mechanism calibrated to 0.5 seconds per day. Precision you can feel.",
+      "icon": "I"
+    },
+    {
+      "title": "Sapphire Crystal",
+      "description": "Scratch-resistant sapphire glass, hardened to 9 on the Mohs scale.",
+      "icon": "II"
+    },
+    {
+      "title": "Lifetime Warranty",
+      "description": "Every MERIDIAN comes with a lifetime service guarantee. We stand behind every tick.",
+      "icon": "III"
+    }
+  ],
+  "features_subtext": "How We Build",
+  "cta_headline": "Be <span style=\"font-style: italic; color: {{PRIMARY_COLOR}}\">First</span>",
+  "cta_subtext": "Join the MERIDIAN circle. Early access to new releases and private events.",
+  "cta_button": "Join",
+  "footer_description": "Swiss-engineered timepieces for those who measure moments, not just hours."
+}

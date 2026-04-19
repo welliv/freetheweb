@@ -1,0 +1,40 @@
+<footer id="contact" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          {{LOGO}}
+          <span class="text-xl font-bold">{{BUSINESS_NAME}}</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">{{FOOTER_DESCRIPTION}}</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Shop</h4>
+        <ul class="space-y-3">
+          <li><a href="#products" class="text-gray-300 hover:text-white transition text-sm">All Products</a></li>
+          {{FOOTER_SHOP_LINKS}}
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Company</h4>
+        <ul class="space-y-3">
+          <li><a href="#about" class="text-gray-300 hover:text-white transition text-sm">About Us</a></li>
+          <li><a href="#contact" class="text-gray-300 hover:text-white transition text-sm">Contact</a></li>
+          {{FOOTER_COMPANY_LINKS}}
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Connect</h4>
+        <div class="flex gap-4">
+          {{SOCIAL_LINKS}}
+        </div>
+        <p class="text-gray-500 text-xs mt-6">
+          Built with <a href="https://freetheweb.net" class="underline hover:text-white">FreeTheWeb</a> — own your code.
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+      <p class="text-gray-500 text-sm">&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

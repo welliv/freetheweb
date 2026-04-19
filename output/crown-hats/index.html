@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crown Hats — Premium Headwear for Every Style</title>
+  <meta name="description" content="Crown Hats — Premium Headwear for Every Style">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #d4a574;
+    }
+    * { font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+  
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background: var(--primary)">C</div>
+        <span class="text-xl font-bold tracking-tight" style="color: var(--primary)">Crown Hats</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#products" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Products</a>
+        <a href="#about" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">About</a>
+        <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Contact</a>
+        <a href="#cart" class="relative p-2 text-gray-700 hover:text-gray-900 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full text-xs text-white flex items-center justify-center" style="background: var(--primary)">0</span>
+        </a>
+      </div>
+      <button class="md:hidden p-2 text-gray-700" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <a href="#products" class="block py-2 text-sm font-medium text-gray-700">Products</a>
+      <a href="#about" class="block py-2 text-sm font-medium text-gray-700">About</a>
+      <a href="#contact" class="block py-2 text-sm font-medium text-gray-700">Contact</a>
+    </div>
+  </div>
+</nav>
+
+  <section class="hero pt-32 pb-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-white/20 text-white mb-6">
+          New Collection 2026
+        </span>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          Find Your Perfect Crown
+        </h1>
+        <p class="text-lg sm:text-xl text-white/80 mb-8 max-w-lg">
+          Handcrafted hats made from premium materials. Designed for those who stand out.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#products" class="inline-flex items-center px-8 py-4 rounded-full bg-white font-semibold text-lg hover:bg-gray-100 transition shadow-lg" style="color: var(--primary)">
+            Shop Now
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="#about" class="inline-flex items-center px-8 py-4 rounded-full border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition">
+            Learn More
+          </a>
+        </div>
+      </div>
+      <div class="hidden lg:block">
+        <div class="relative">
+          <div class="absolute inset-0 bg-white/10 rounded-3xl transform rotate-6"></div>
+          <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?w=800&q=80" alt="Crown Hats" class="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section id="products" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Products</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Handpicked for you</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+  <div class="relative overflow-hidden aspect-square bg-gray-100">
+    <img src="https://images.unsplash.com/photo-1588850561407-ed78c334e67a?w=400&q=80" alt="Classic Snapback" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold text-white" style="background: var(--primary)">Best Seller</span>
+  </div>
+  <div class="p-5">
+    <h3 class="font-semibold text-gray-900 text-lg mb-1">Classic Snapback</h3>
+    <p class="text-sm text-gray-500 mb-3">Premium cotton snapback with adjustable fit</p>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold" style="color: var(--primary)">$39.99</span>
+      <a href="https://buy.stripe.com/test_4gM3cxehp9XtfdW8ti57W0N" target="_blank" class="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold text-white hover:opacity-90 transition" style="background: var(--primary)">
+        Buy Now
+        <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+  <div class="relative overflow-hidden aspect-square bg-gray-100">
+    <img src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&q=80" alt="Wool Beanie" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    
+  </div>
+  <div class="p-5">
+    <h3 class="font-semibold text-gray-900 text-lg mb-1">Wool Beanie</h3>
+    <p class="text-sm text-gray-500 mb-3">Soft merino wool for cold days</p>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold" style="color: var(--primary)">$29.99</span>
+      <a href="https://buy.stripe.com/test_bJe14pfltd9F2raeRG57W0O" target="_blank" class="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold text-white hover:opacity-90 transition" style="background: var(--primary)">
+        Buy Now
+        <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+  <div class="relative overflow-hidden aspect-square bg-gray-100">
+    <img src="https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400&q=80" alt="Straw Fedora" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold text-white" style="background: var(--primary)">New</span>
+  </div>
+  <div class="p-5">
+    <h3 class="font-semibold text-gray-900 text-lg mb-1">Straw Fedora</h3>
+    <p class="text-sm text-gray-500 mb-3">Handwoven straw, perfect for summer</p>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold" style="color: var(--primary)">$59.99</span>
+      <a href="https://buy.stripe.com/test_9B6fZjgpx4D94zieRG57W0P" target="_blank" class="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold text-white hover:opacity-90 transition" style="background: var(--primary)">
+        Buy Now
+        <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+  <div class="relative overflow-hidden aspect-square bg-gray-100">
+    <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400&q=80" alt="Leather Trucker" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    
+  </div>
+  <div class="p-5">
+    <h3 class="font-semibold text-gray-900 text-lg mb-1">Leather Trucker</h3>
+    <p class="text-sm text-gray-500 mb-3">Vintage leather trucker cap</p>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold" style="color: var(--primary)">$49.99</span>
+      <a href="https://buy.stripe.com/test_5kQ8wR3CLc5Bgi0aBq57W0Q" target="_blank" class="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold text-white hover:opacity-90 transition" style="background: var(--primary)">
+        Buy Now
+        <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</section>
+
+  <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Why Choose Us</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">What makes us different</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="feature-card p-8 rounded-2xl bg-gray-50 hover:bg-gray-100 transition">
+  <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style="background: var(--primary)">
+    <span class="text-2xl text-white">✦</span>
+  </div>
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">Handcrafted Quality</h3>
+  <p class="text-gray-600 leading-relaxed">Every hat is made with premium materials and attention to detail.</p>
+</div>
+
+<div class="feature-card p-8 rounded-2xl bg-gray-50 hover:bg-gray-100 transition">
+  <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style="background: var(--primary)">
+    <span class="text-2xl text-white">⚡</span>
+  </div>
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">Free Shipping</h3>
+  <p class="text-gray-600 leading-relaxed">Free shipping on all orders over $50. Arrives in 3-5 days.</p>
+</div>
+
+<div class="feature-card p-8 rounded-2xl bg-gray-50 hover:bg-gray-100 transition">
+  <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style="background: var(--primary)">
+    <span class="text-2xl text-white">↩</span>
+  </div>
+  <h3 class="text-xl font-semibold text-gray-900 mb-3">Perfect Fit Guarantee</h3>
+  <p class="text-gray-600 leading-relaxed">Not happy? Return within 30 days for a full refund.</p>
+</div>
+
+
+    </div>
+  </div>
+</section>
+
+  <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: var(--primary)">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">Ready to Find Your Crown?</h2>
+    <p class="text-lg text-white/80 mb-8 max-w-2xl mx-auto">Join thousands of happy customers who found their perfect hat.</p>
+    <a href="#products" class="inline-flex items-center px-8 py-4 rounded-full bg-white font-semibold text-lg hover:bg-gray-100 transition shadow-lg" style="color: var(--primary)">
+      Browse Collection
+      <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+  <footer id="contact" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm" style="background: var(--primary)">C</div>
+          <span class="text-xl font-bold">Crown Hats</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">Crown Hats — Premium headwear for those who stand out. Handcrafted with love.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Shop</h4>
+        <ul class="space-y-3">
+          <li><a href="#products" class="text-gray-300 hover:text-white transition text-sm">All Products</a></li>
+          
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Company</h4>
+        <ul class="space-y-3">
+          <li><a href="#about" class="text-gray-300 hover:text-white transition text-sm">About Us</a></li>
+          <li><a href="#contact" class="text-gray-300 hover:text-white transition text-sm">Contact</a></li>
+          
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-4">Connect</h4>
+        <div class="flex gap-4">
+          
+        </div>
+        <p class="text-gray-500 text-xs mt-6">
+          Built with <a href="https://freetheweb.net" class="underline hover:text-white">FreeTheWeb</a> — own your code.
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+      <p class="text-gray-500 text-sm">&copy; {{YEAR}} Crown Hats. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

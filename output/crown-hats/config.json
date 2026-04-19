@@ -1,0 +1,63 @@
+{
+  "business_name": "Crown Hats",
+  "tagline": "Premium Headwear for Every Style",
+  "tagline_badge": "New Collection 2026",
+  "hero_headline": "Find Your Perfect Crown",
+  "hero_subtext": "Handcrafted hats made from premium materials. Designed for those who stand out.",
+  "hero_image": "https://images.unsplash.com/photo-1521369909029-2afed882baee?w=800&q=80",
+  "primary_color": "#1a1a1a",
+  "secondary_color": "#d4a574",
+  "products": [
+    {
+      "name": "Classic Snapback",
+      "description": "Premium cotton snapback with adjustable fit",
+      "price": "$39.99",
+      "image": "https://images.unsplash.com/photo-1588850561407-ed78c334e67a?w=400&q=80",
+      "stripe_link": "https://buy.stripe.com/test_4gM3cxehp9XtfdW8ti57W0N",
+      "badge": "Best Seller"
+    },
+    {
+      "name": "Wool Beanie",
+      "description": "Soft merino wool for cold days",
+      "price": "$29.99",
+      "image": "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&q=80",
+      "stripe_link": "https://buy.stripe.com/test_bJe14pfltd9F2raeRG57W0O"
+    },
+    {
+      "name": "Straw Fedora",
+      "description": "Handwoven straw, perfect for summer",
+      "price": "$59.99",
+      "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400&q=80",
+      "stripe_link": "https://buy.stripe.com/test_9B6fZjgpx4D94zieRG57W0P",
+      "badge": "New"
+    },
+    {
+      "name": "Leather Trucker",
+      "description": "Vintage leather trucker cap",
+      "price": "$49.99",
+      "image": "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400&q=80",
+      "stripe_link": "https://buy.stripe.com/test_5kQ8wR3CLc5Bgi0aBq57W0Q"
+    }
+  ],
+  "features": [
+    {
+      "title": "Handcrafted Quality",
+      "description": "Every hat is made with premium materials and attention to detail.",
+      "icon": "\u2726"
+    },
+    {
+      "title": "Free Shipping",
+      "description": "Free shipping on all orders over $50. Arrives in 3-5 days.",
+      "icon": "\u26a1"
+    },
+    {
+      "title": "Perfect Fit Guarantee",
+      "description": "Not happy? Return within 30 days for a full refund.",
+      "icon": "\u21a9"
+    }
+  ],
+  "cta_headline": "Ready to Find Your Crown?",
+  "cta_subtext": "Join thousands of happy customers who found their perfect hat.",
+  "cta_button": "Browse Collection",
+  "footer_description": "Crown Hats \u2014 Premium headwear for those who stand out. Handcrafted with love."
+}
